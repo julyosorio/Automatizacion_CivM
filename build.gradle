@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.3"
+
+    }
+}
+
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "6.4.2"
+    id 'idea'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.2.3"
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.serenity-bdd:serenity-core:3.2.3'
+    implementation 'net.serenity-bdd:serenity-junit:3.2.3'
+    implementation 'net.serenity-bdd:serenity-screenplay:3.2.3'
+    implementation 'net.serenity-bdd:serenity-cucumber:3.2.3'
+    implementation 'org.projectlombok:lombok:1.18.22'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+
+    implementation group: 'net.serenity-bdd', name: 'serenity-ensure', version: '3.2.3'
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'
+    implementation group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.3.0.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha5'
+    runtimeOnly group: 'org.gradle', name: 'gradle-tooling-api', version: '7.3-20210825160000+0000'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
+
+    implementation 'com.google.api-client:google-api-client:1.32.2'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.32.1'
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev20211108-1.32.1'
+}
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)
